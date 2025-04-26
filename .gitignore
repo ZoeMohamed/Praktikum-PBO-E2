@@ -1,0 +1,7 @@
+# Ignore these directories
+/uts/
+/latihan-1/
+/latihan-2/
+
+# Ignore compiled files
+*.class 

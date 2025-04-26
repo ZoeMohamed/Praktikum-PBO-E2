@@ -1,0 +1,339 @@
+// ===========================================
+// File: Manusia.java
+// ===========================================
+/* Nama File : Manusia.java
+ * Deskripsi : Kelas abstrak yang merepresentasikan Manusia dengan method-method abstrak untuk menghitung masa kerja
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+import java.time.LocalDate;
+
+public abstract class Manusia {
+    protected String nama;
+    protected LocalDate tgl_mulai_kerja;
+    protected String alamat;
+    protected double pendapatan;
+    protected static int counterMns = 0;
+
+    // Konstruktor untuk membuat objek Manusia dengan data lengkap
+    public Manusia(String nama, LocalDate tgl_mulai_kerja, String alamat, double pendapatan) {
+        this.nama = nama;
+        this.tgl_mulai_kerja = tgl_mulai_kerja;
+        this.alamat = alamat;
+        this.pendapatan = pendapatan;
+        counterMns++;
+    }
+
+    // Mengambil nama manusia
+    public String getNama() {
+        return nama;
+    }
+
+    // Mengatur nama manusia
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    // Mengambil tanggal mulai kerja
+    public LocalDate getTgl_mulai_kerja() {
+        return tgl_mulai_kerja;
+    }
+
+    // Mengatur tanggal mulai kerja
+    public void setTgl_mulai_kerja(LocalDate tgl_mulai_kerja) {
+        this.tgl_mulai_kerja = tgl_mulai_kerja;
+    }
+
+    // Mengambil alamat
+    public String getAlamat() {
+        return alamat;
+    }
+
+    // Mengatur alamat
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    // Mengambil pendapatan
+    public double getPendapatan() {
+        return pendapatan;
+    }
+
+    // Mengatur pendapatan
+    public void setPendapatan(double pendapatan) {
+        this.pendapatan = pendapatan;
+    }
+
+    // Mengambil jumlah objek Manusia yang telah dibuat
+    public static int getCounterMns() {
+        return counterMns;
+    }
+
+    // Method abstrak untuk menghitung masa kerja dalam tahun
+    public abstract int hitungMasaKerja();
+
+    // Menampilkan informasi lengkap manusia
+    public void cetakInfo() {
+        System.out.println("Nama: " + nama);
+        System.out.println("Tanggal Mulai Kerja: " + tgl_mulai_kerja);
+        System.out.println("Alamat: " + alamat);
+        System.out.println("Pendapatan: " + pendapatan);
+    }
+}
+
+// ===========================================
+// File: MManusia.java
+// ===========================================
+/* Nama File : MManusia.java
+ * Deskripsi : Kelas utama untuk menguji fungsionalitas kelas Manusia, PNS, Pengusaha, Petani dan implementasi interface Pajak
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class MManusia {
+    public static void main(String[] args) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        PNS p1 = new PNS("Satriyo", LocalDate.parse("01-04-2006", formatter), "Jl. Seroja", 15000000,
+                "198302032006041002");
+        Pengusaha pe1 = new Pengusaha("Adhy", LocalDate.parse("01-01-2000", formatter), "Jl.Air", 55000000,
+                "000-556-773-212-000-5");
+        Petani pt1 = new Petani("Nugraha", LocalDate.parse("09-01-1977", formatter), "Jl. Bunga 9 Tembalang", 5000000,
+                "wonogiri");
+        PNS p2 = new PNS("Panji", LocalDate.parse("01-04-2010", formatter), 10000000, "198004212010041002");
+        p2.setAlamat("Jl. Panorama 111 Tembalang");
+
+        System.out.println("Jumlah Manusia = " + Manusia.getCounterMns());
+        System.out.println("Jumlah PNS = " + PNS.getCounterPNS());
+        System.out.println("Jumlah Pengusaha = " + Pengusaha.getCounterPengusaha());
+        System.out.println("Jumlah Petani = " + Petani.getCounterPetani());
+
+        System.out.println("Pajak PNS p1 = " + p1.hitungPajak());
+        System.out.println("Pajak Pengusaha pe1 = " + pe1.hitungPajak());
+        System.out.println("Pajak Petani pt1 = " + pt1.hitungPajak());
+
+        System.out.println("Masa Kerja p1 = " + p1.hitungMasaKerja());
+        System.out.println("Masa Kerja pe1 = " + pe1.hitungMasaKerja());
+        System.out.println("Masa Kerja pt1 = " + pt1.hitungMasaKerja());
+
+        p1.cetakInfo();
+        pe1.cetakInfo();
+        pt1.cetakInfo();
+    }
+}
+
+// ===========================================
+// File: Pajak.java
+// ===========================================
+/* Nama File : Pajak.java
+ * Deskripsi : Interface yang mendefinisikan kemampuan untuk menghitung pajak
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+
+public interface Pajak {
+    // Method untuk menghitung pajak yang harus dibayarkan
+    double hitungPajak();
+}
+
+// ===========================================
+// File: PNS.java
+// ===========================================
+/* Nama File : PNS.java
+ * Deskripsi : Kelas turunan dari Manusia yang merepresentasikan Pegawai Negeri Sipil dan mengimplementasikan interface Pajak
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class PNS extends Manusia implements Pajak {
+    private String nip;
+    private static int counterPNS = 0;
+
+    // Konstruktor PNS dengan alamat
+    public PNS(String nama, LocalDate tgl_mulai_kerja, String alamat, double pendapatan, String nip) {
+        super(nama, tgl_mulai_kerja, alamat, pendapatan);
+        this.nip = nip;
+        counterPNS++;
+    }
+
+    // Konstruktor PNS tanpa alamat (alamat kosong)
+    public PNS(String nama, LocalDate tgl_mulai_kerja, double pendapatan, String nip) {
+        super(nama, tgl_mulai_kerja, "", pendapatan);
+        this.nip = nip;
+        counterPNS++;
+    }
+
+    // Mengambil NIP
+    public String getNip() {
+        return nip;
+    }
+
+    // Mengatur NIP
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    // Mengambil jumlah objek PNS yang telah dibuat
+    public static int getCounterPNS() {
+        return counterPNS;
+    }
+
+    // Menghitung masa kerja PNS dengan penambahan konstanta A
+    @Override
+    public int hitungMasaKerja() {
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(tgl_mulai_kerja, now);
+        int years = period.getYears();
+        int A = 1; // digit nim ke-14
+        return years + A;
+    }
+
+    // Menghitung pajak PNS sebesar 10% dari pendapatan
+    @Override
+    public double hitungPajak() {
+        return 0.1 * pendapatan; // 10% of pendapatan
+    }
+
+    // Menampilkan informasi PNS termasuk NIP
+    @Override
+    public void cetakInfo() {
+        super.cetakInfo();
+        System.out.println("NIP: " + nip);
+    }
+}
+
+// ===========================================
+// File: Petani.java
+// ===========================================
+/* Nama File : Petani.java
+ * Deskripsi : Kelas turunan dari Manusia yang merepresentasikan Petani dan mengimplementasikan interface Pajak
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Petani extends Manusia implements Pajak {
+    private String asal_kota;
+    private static int counterPetani = 0;
+    // Konstruktor untuk membuat objek Petani dengan data lengkap
+    public Petani(String nama, LocalDate tgl_mulai_kerja, String alamat, double pendapatan, String asal_kota) {
+        super(nama, tgl_mulai_kerja, alamat, pendapatan);
+        this.asal_kota = asal_kota;
+        counterPetani++;
+    }
+
+    // Mengambil asal kota petani
+    public String getAsal_kota() {
+        return asal_kota;
+    }
+
+    // Mengatur asal kota petani
+    public void setAsal_kota(String asal_kota) {
+        this.asal_kota = asal_kota;
+    }
+
+    // Mengambil jumlah objek Petani yang telah dibuat
+    public static int getCounterPetani() {
+        return counterPetani;
+    }
+
+    // Menghitung masa kerja Petani dengan penambahan konstanta C
+    @Override
+    public int hitungMasaKerja() {
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(tgl_mulai_kerja, now);
+        int years = period.getYears();
+        int C = 1; // digit nim ke-12
+
+        return years + C;
+    }
+
+    // Menghitung pajak Petani (0% - tidak dikenakan pajak)
+    @Override
+    public double hitungPajak() {
+        return 0; // No tax for Petani
+    }
+
+    // Menampilkan informasi Petani termasuk asal kota
+    @Override
+    public void cetakInfo() {
+        super.cetakInfo();
+        System.out.println("Asal Kota: " + asal_kota);
+    }
+}
+
+// ===========================================
+// File: Pengusaha.java
+// ===========================================
+/* Nama File : Pengusaha.java
+ * Deskripsi : Kelas turunan dari Manusia yang merepresentasikan Pengusaha dan mengimplementasikan interface Pajak
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Latihan;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Pengusaha extends Manusia implements Pajak {
+    private String npwp;
+    private static int counterPengusaha = 0;
+
+    // Konstruktor untuk membuat objek Pengusaha dengan data lengkap
+    public Pengusaha(String nama, LocalDate tgl_mulai_kerja, String alamat, double pendapatan, String npwp) {
+        super(nama, tgl_mulai_kerja, alamat, pendapatan);
+        this.npwp = npwp;
+        counterPengusaha++;
+    }
+
+    // Mengambil NPWP pengusaha
+    public String getNpwp() {
+        return npwp;
+    }
+
+    // Mengatur NPWP pengusaha
+    public void setNpwp(String npwp) {
+        this.npwp = npwp;
+    }
+
+    // Mengambil jumlah objek Pengusaha yang telah dibuat
+    public static int getCounterPengusaha() {
+        return counterPengusaha;
+    }
+
+    // Menghitung masa kerja Pengusaha dengan penambahan konstanta B
+    @Override
+    public int hitungMasaKerja() {
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(tgl_mulai_kerja, now);
+        int years = period.getYears();
+        int B = 8; // digit nim ke-13
+        return years + B;
+    }
+
+    // Menghitung pajak Pengusaha sebesar 15% dari pendapatan
+    @Override
+    public double hitungPajak() {
+        return 0.15 * pendapatan; // 15% of pendapatan
+    }
+
+    // Menampilkan informasi Pengusaha termasuk NPWP
+    @Override
+    public void cetakInfo() {
+        super.cetakInfo();
+        System.out.println("NPWP: " + npwp);
+    }
+} 

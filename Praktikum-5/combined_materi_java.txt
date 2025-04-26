@@ -1,0 +1,409 @@
+===========================================
+File: BangunDatar.java
+===========================================
+/* Nama File : BangunDatar.java
+ * Deskripsi : Kelas abstrak yang merepresentasikan Bangun Datar dengan method-method abstrak untuk menghitung luas dan keliling
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Materi;
+
+public abstract class BangunDatar {
+    protected int jmlSisi;
+    protected String warna;
+    protected String border;
+    protected static int counterBangunDatar = 0;
+
+    // Konstruktor default
+    public BangunDatar() {
+        counterBangunDatar++;
+    }
+
+    // Konstruktor dengan parameter
+    public BangunDatar(int jmlSisi, String warna, String border) {
+        this.jmlSisi = jmlSisi;
+        this.warna = warna;
+        this.border = border;
+        counterBangunDatar++;
+    }
+
+    // Mengambil jumlah sisi
+    public int getJmlSisi() {
+        return jmlSisi;
+    }
+
+    // Mengatur jumlah sisi
+    public void setJmlSisi(int jmlSisi) {
+        this.jmlSisi = jmlSisi;
+    }
+
+    // Mengambil warna
+    public String getWarna() {
+        return warna;
+    }
+
+    // Mengatur warna
+    public void setWarna(String warna) {
+        this.warna = warna;
+    }
+
+    // Mengambil jenis border
+    public String getBorder() {
+        return border;
+    }
+
+    // Mengatur jenis border
+    public void setBorder(String border) {
+        this.border = border;
+    }
+
+    // Menampilkan informasi bangun datar
+    public void printInfo() {
+        System.out.println("Jumlah Sisi : " + jmlSisi);
+        System.out.println("Warna : " + warna);
+        System.out.println("Border : " + border);
+    }
+
+    // Menampilkan jumlah objek bangun datar yang telah dibuat
+    public static void printcounterBangunDatar() {
+        System.out.println("Counter Bangun Datar : " + counterBangunDatar);
+    }
+
+    // Method abstrak untuk menghitung luas
+    public abstract double getLuas();
+
+    // Method abstrak untuk menghitung keliling
+    public abstract double getKeliling();
+
+    // Memeriksa kesamaan luas dengan bangun datar lain
+    public boolean isEqualLuas(BangunDatar X) {
+        return this.getLuas() == X.getLuas();
+    }
+
+    // Memeriksa kesamaan keliling dengan bangun datar lain
+    public boolean isEqualKeliling(BangunDatar X) {
+        return this.getKeliling() == X.getKeliling();
+    }
+}
+
+===========================================
+File: IResize.java
+===========================================
+/* Nama File : IResize.java
+ * Deskripsi : Interface yang mendefinisikan kemampuan untuk mengubah ukuran suatu objek
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+package Materi;
+public interface IResize {
+    // Method untuk memperbesar ukuran objek sebesar 10%
+    public void zoomIn();
+
+    // Method untuk memperkecil ukuran objek sebesar 10%
+    public void zoomOut();
+
+    // Method untuk mengubah ukuran objek sesuai persentase yang diberikan
+    public void zoom(int percent);
+}
+
+===========================================
+File: Lingkaran.java
+===========================================
+/* Nama File : Lingkaran.java
+ * Deskripsi : Kelas turunan dari BangunDatar yang merepresentasikan bentuk Lingkaran dan mengimplementasikan IResize
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+
+package Materi;
+public class Lingkaran extends BangunDatar implements IResize {
+
+    private double jari;
+
+    // Konstruktor default
+    public Lingkaran() {
+    }
+
+    // Konstruktor dengan parameter
+    public Lingkaran(double diameter, String border, String warna) {
+        super(1, warna, border);
+        this.jari = diameter / 2;
+    }
+
+    // Mengambil nilai jari-jari
+    public double getJari() {
+        return jari;
+    }
+
+    // Mengatur nilai jari-jari
+    public void setJari(double jari) {
+        this.jari = jari;
+    }
+
+    // Menghitung luas lingkaran
+    @Override
+    public double getLuas() {
+        return Math.PI * jari * jari;
+    }
+
+    // Menghitung keliling lingkaran
+    @Override
+    public double getKeliling() {
+        return 2 * Math.PI * jari;
+    }
+
+    // Menampilkan informasi lingkaran
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Jari-jari : " + jari);
+    }
+
+    // Memperbesar ukuran lingkaran sebesar 10%
+    @Override
+    public void zoomIn() {
+        jari = jari * 1.1;
+    }
+
+    // Memperkecil ukuran lingkaran sebesar 10%
+    @Override
+    public void zoomOut() {
+        jari = jari * 0.9;
+    }
+
+    // Mengubah ukuran lingkaran sesuai persentase yang diberikan
+    @Override
+    public void zoom(int percent) {
+        jari = jari * percent / 100.0;
+    }
+}
+
+===========================================
+File: MBangunDatar.java
+===========================================
+/* Nama File : MBangunDatar.java
+ * Deskripsi : Kelas utama untuk menguji fungsionalitas kelas BangunDatar, Persegi, Lingkaran dan implementasi interface IResize
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+
+package Materi;
+public class MBangunDatar {
+    public static void main(String[] args) {
+        // Membuat Objek Persegi
+        Persegi p = new Persegi(5, "Hijau", "Kuning");
+        System.out.println("Info Persegi");
+        p.printInfo();
+        System.out.println("Luas Persegi: " + p.getLuas());
+        System.out.println("Keliling Persegi: " + p.getKeliling());
+        System.out.println("");
+
+        // Membuat Objek Lingkaran
+        Lingkaran l = new Lingkaran(5, "Biru", "Putih");
+        System.out.println("Info Lingkaran");
+        l.printInfo();
+        System.out.println("Luas Lingkaran: " + l.getLuas());
+        System.out.println("Keliling Lingkaran: " + l.getKeliling());
+        System.out.println("");
+
+        // Demonstrasi polymorphism dengan array dari tipe BangunDatar
+        BangunDatar[] bangunArray = new BangunDatar[2];
+        bangunArray[0] = p;
+        bangunArray[1] = l;
+
+        System.out.println("Info Semua Bangun Datar:");
+        for (BangunDatar bangun : bangunArray) {
+            bangun.printInfo();
+            System.out.println("Luas: " + bangun.getLuas());
+            System.out.println("Keliling: " + bangun.getKeliling());
+            System.out.println("");
+        }
+
+        // Membuat bangun datar dengan luas yang sama
+        Persegi p2 = new Persegi(Math.sqrt(Math.PI * 6.25), "Merah", "Hitam");
+        Lingkaran l2 = new Lingkaran(5, "Kuning", "Hitam");
+
+        // Membuat bangun datar dengan keliling yang sama
+        double sisiPersegiSamaKeliling = (Math.PI * 5) / 2;
+        Persegi p3 = new Persegi(sisiPersegiSamaKeliling, "Ungu", "Putih");
+        Lingkaran l3 = new Lingkaran(5, "Orange", "Hitam");
+
+        // Demonstrasi penggunaan method isEqualLuas dan isEqualKeliling
+        System.out.println("\nPerbandingan Luas:");
+        System.out.println("Luas Persegi p: " + p.getLuas());
+        System.out.println("Luas Lingkaran l: " + l.getLuas());
+        System.out.println("Luas Persegi p2: " + p2.getLuas());
+        System.out.println("Luas Lingkaran l2: " + l2.getLuas());
+        System.out.println("p.isEqualLuas(l): " + p.isEqualLuas(l));
+        System.out.println("p2.isEqualLuas(l2): " + p2.isEqualLuas(l2));
+
+        System.out.println("\nPerbandingan Keliling:");
+        System.out.println("Keliling Persegi p: " + p.getKeliling());
+        System.out.println("Keliling Lingkaran l: " + l.getKeliling());
+        System.out.println("Keliling Persegi p3: " + p3.getKeliling());
+        System.out.println("Keliling Lingkaran l3: " + l3.getKeliling());
+        System.out.println("p.isEqualKeliling(l): " + p.isEqualKeliling(l));
+        System.out.println("p3.isEqualKeliling(l3): " + p3.isEqualKeliling(l3));
+
+        // Demonstrasi penggunaan interface IResize
+        System.out.println("\nDemonstrasi IResize:");
+
+        // Demonstrasi pada Persegi
+        System.out.println("Persegi sebelum diubah ukuran:");
+        System.out.println("Sisi: " + p.getSisi());
+        System.out.println("Luas: " + p.getLuas());
+
+        p.zoomIn();
+        System.out.println("Persegi setelah zoomIn (10% lebih besar):");
+        System.out.println("Sisi: " + p.getSisi());
+        System.out.println("Luas: " + p.getLuas());
+
+        p.zoomOut();
+        System.out.println("Persegi setelah zoomOut (10% lebih kecil):");
+        System.out.println("Sisi: " + p.getSisi());
+        System.out.println("Luas: " + p.getLuas());
+
+        p.zoom(150);
+        System.out.println("Persegi setelah zoom(150) (150%):");
+        System.out.println("Sisi: " + p.getSisi());
+        System.out.println("Luas: " + p.getLuas());
+
+        // Demonstrasi pada Lingkaran
+        System.out.println("\nLingkaran sebelum diubah ukuran:");
+        System.out.println("Jari-jari: " + l.getJari());
+        System.out.println("Luas: " + l.getLuas());
+
+        l.zoomIn();
+        System.out.println("Lingkaran setelah zoomIn (10% lebih besar):");
+        System.out.println("Jari-jari: " + l.getJari());
+        System.out.println("Luas: " + l.getLuas());
+
+        l.zoomOut();
+        System.out.println("Lingkaran setelah zoomOut (10% lebih kecil):");
+        System.out.println("Jari-jari: " + l.getJari());
+        System.out.println("Luas: " + l.getLuas());
+
+        l.zoom(200);
+        System.out.println("Lingkaran setelah zoom(200) (200%):");
+        System.out.println("Jari-jari: " + l.getJari());
+        System.out.println("Luas: " + l.getLuas());
+
+        // Demonstrasi polimorfisme dengan interface IResize
+        System.out.println("\nDemonstrasi polimorfisme dengan interface IResize:");
+        IResize[] resizableObjects = new IResize[2];
+        resizableObjects[0] = p;
+        resizableObjects[1] = l;
+
+        for (IResize obj : resizableObjects) {
+            System.out.println("Sebelum diubah:");
+            if (obj instanceof Persegi) {
+                Persegi persegi = (Persegi) obj;
+                System.out.println("Persegi dengan sisi: " + persegi.getSisi());
+            } else if (obj instanceof Lingkaran) {
+                Lingkaran lingkaran = (Lingkaran) obj;
+                System.out.println("Lingkaran dengan jari-jari: " + lingkaran.getJari());
+            }
+
+            obj.zoom(50); // Resize ke 50%
+
+            System.out.println("Setelah diubah (50%):");
+            if (obj instanceof Persegi) {
+                Persegi persegi = (Persegi) obj;
+                System.out.println("Persegi dengan sisi: " + persegi.getSisi());
+            } else if (obj instanceof Lingkaran) {
+                Lingkaran lingkaran = (Lingkaran) obj;
+                System.out.println("Lingkaran dengan jari-jari: " + lingkaran.getJari());
+            }
+            System.out.println();
+        }
+
+        // Menampilkan jumlah objek yang telah dibuat
+        BangunDatar.printcounterBangunDatar();
+    }
+}
+
+===========================================
+File: Persegi.java
+===========================================
+/* Nama File : Persegi.java
+ * Deskripsi : Kelas turunan dari BangunDatar yang merepresentasikan bentuk Persegi dan mengimplementasikan IResize
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 23/03/2025
+ */
+
+ 
+package Materi;
+public class Persegi extends BangunDatar implements IResize {
+    private double sisi;
+
+    // Konstruktor default
+    public Persegi() {
+        setJmlSisi(4);
+    }
+
+    // Konstruktor dengan parameter
+    public Persegi(double sisi, String warna, String border) {
+        this.sisi = sisi;
+        this.warna = warna;
+        this.border = border;
+        this.jmlSisi = 4;
+    }
+
+    // Mengambil nilai sisi
+    public double getSisi() {
+        return sisi;
+    }
+
+    // Mengatur nilai sisi
+    public double setSisi(double sisi) {
+        return this.sisi = sisi;
+    }
+
+    // Menghitung luas persegi
+    @Override
+    public double getLuas() {
+        return sisi * sisi;
+    }
+
+    // Menghitung keliling persegi
+    @Override
+    public double getKeliling() {
+        return 4 * sisi;
+    }
+
+    // Menghitung panjang diagonal persegi
+    public double getDiagonal() {
+        return sisi * Math.sqrt(2);
+    }
+
+    // Menampilkan informasi persegi
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Sisi : " + sisi);
+    }
+
+    // Memperbesar ukuran persegi sebesar 10%
+    @Override
+    public void zoomIn() {
+        sisi = sisi * 1.1;
+    }
+
+    // Memperkecil ukuran persegi sebesar 10%
+    @Override
+    public void zoomOut() {
+        sisi = sisi * 0.9;
+    }
+
+    // Mengubah ukuran persegi sesuai persentase yang diberikan
+    @Override
+    public void zoom(int percent) {
+        sisi = sisi * percent / 100.0;
+    }
+
+    // Method Ini tidak bisa di Override karena bersifat static
+    // @Override
+    // public static void printcounterBangunDatar() {
+    // System.out.println("Counter Bangun Datar : " + counterBangunDatar);
+    // }
+} 

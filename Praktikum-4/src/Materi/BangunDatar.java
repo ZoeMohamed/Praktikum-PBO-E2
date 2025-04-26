@@ -60,3 +60,33 @@ public class BangunDatar {
     }
 
 }
+
+
+
+def solve(N, K, sizes):
+    sizes.sort()
+    
+    left, right = 0, int((K ** 0.5) // 2) + 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        total_area = 0
+        
+        for size in sizes:
+            frame_size = size + 2 * mid
+            total_area += frame_size * frame_size
+            
+            if total_area > K:
+                break
+        
+        if total_area <= K:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return right
+
+N, K = map(int, input().split())
+sizes = list(map(int, input().split()))
+
+print(solve(N, K, sizes))
