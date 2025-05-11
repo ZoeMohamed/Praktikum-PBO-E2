@@ -2,7 +2,7 @@
  * Nama File : BangunDatarGeneric.java
  * Deskripsi : kelas generic untuk bangun datar
  * Pembuat : Zoe Mohamed // 24060123140182
- * Tanggal : 01/05/2025
+ * Tanggal : 11/05/2025
  */
 
 public class BangunDatarGenerik<T extends BangunDatar> {
