@@ -1,7 +1,7 @@
 /* Nama File : Anabul.java
  * Deskripsi : Kelas abstrak Anabul yang akan diimplementasikan oleh kelas turunannya
  * Pembuat   : Zoe Mohamed // 24060123140182
- * Tanggal   : 26/04/2025
+ * Tanggal   : 11/05/2025
  */
 
 public abstract class Anabul {
