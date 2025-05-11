@@ -1,7 +1,7 @@
 /* Nama File : Burung.java
  * Deskripsi : Kelas Burung yang merupakan turunan dari kelas abstrak Anabul
  * Pembuat   : Zoe Mohamed // 24060123140182
- * Tanggal   : 26/04/2025
+ * Tanggal   : 11/05/2025
  */
 
 public class Burung extends Anabul {
