@@ -2,7 +2,7 @@
  * Nama File : PersegiPanjang.java
  * Deskripsi : implementasi PersegiPanjang sebagai BangunDatar
  * Pembuat : Zoe Mohamed // 24060123140182
- * Tanggal : 01/05/2025
+ * Tanggal : 11/05/2025
  */
 
 public class PersegiPanjang extends BangunDatar {
