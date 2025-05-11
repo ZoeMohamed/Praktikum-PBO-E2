@@ -2,7 +2,7 @@
  * Nama File : Segitiga.java
  * Deskripsi : implementasi Segitiga sebagai BangunDatar
  * Pembuat : Zoe Mohamed // 24060123140182
- * Tanggal : 01/05/2025
+ * Tanggal : 11/05/2025
  */
 
 public class Segitiga extends BangunDatar {
