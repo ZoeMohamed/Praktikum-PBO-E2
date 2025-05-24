@@ -1,6 +1,12 @@
+/**
+ * Nama File : GuiMedium.java
+ * Deskripsi : Kelas untuk membuat form GUI Medium
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 24/05/2025
+ */
+
+
 import javax.swing.DefaultListModel;
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template

@@ -1,3 +1,10 @@
+/**
+ * Nama File : GuiSimpel.java
+ * Deskripsi : Kelas untuk membuat form GUI Simpel
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 24/05/2025
+ */
+
 import javax.swing.DefaultListModel;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

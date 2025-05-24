@@ -1,3 +1,11 @@
+/**
+ * Nama File : GuiCollection.java
+ * Deskripsi : Kelas untuk membuat form GUI Collection
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 24/05/2025
+ */
+
+
 import javax.swing.DefaultListModel;
 import java.util.*;
 

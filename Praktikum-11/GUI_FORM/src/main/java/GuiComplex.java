@@ -1,3 +1,11 @@
+/**
+ * Nama File : GuiComplex.java
+ * Deskripsi : Kelas untuk membuat form GUI Complex
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 24/05/2025
+ */
+
+
 import javax.swing.DefaultListModel;
 import java.util.*;
 

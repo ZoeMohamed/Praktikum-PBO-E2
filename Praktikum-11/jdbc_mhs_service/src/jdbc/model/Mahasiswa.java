@@ -1,3 +1,10 @@
+/**
+ * Nama File : Mahasiswa.java
+ * Deskripsi : Kelas untuk membuat model mahasiswa
+ * Pembuat   : Zoe Mohamed // 24060123140182
+ * Tanggal   : 24/05/2025
+ */
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
